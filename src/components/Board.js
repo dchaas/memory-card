@@ -3,20 +3,9 @@ import Card from "./Card";
 function Board(props) {
   return (
     <div className="board">
-      {props.cards.forEach((card) => {
-        <Card image={card.image} cardText={card.cardText} />;
-      })}
-
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
+      {props.cards.map((card, index) => (
+        <Card key={card.id} image={card.image} cardID={card.id} />
+      ))}
     </div>
   );
 }
