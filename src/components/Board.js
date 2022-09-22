@@ -1,9 +1,12 @@
 import Card from "./Card";
 
-function Board() {
+function Board(props) {
   return (
     <div className="board">
-      <Card />
+      {props.cards.forEach((card) => {
+        <Card image={card.image} cardText={card.cardText} />;
+      })}
+
       <Card />
       <Card />
       <Card />

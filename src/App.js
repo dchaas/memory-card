@@ -25,10 +25,13 @@ const App = () => {
     };
   }, [color]);
 */
+
+  const cards = [{ image: "../assets/thumbs.png", cardText: "Thumbs Up!" }];
+
   return (
-    <div>
+    <div className="app">
       <Header current={2} best={2} />
-      <Board />
+      <Board cards={cards} />
       <Footer />
     </div>
   );
