@@ -21,8 +21,8 @@ body {
 }
 
 .card {
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -56,5 +56,5 @@ body {
 }
 
 .card-image {
-  width: 220px;
+  width: 180px;
 }

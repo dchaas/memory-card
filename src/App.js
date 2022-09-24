@@ -24,27 +24,7 @@ import thumbs from "./assets/thumbs.png";
 import wink from "./assets/wink.png";
 
 const App = () => {
-  /*
-  const [color, setColor] = useState("black");
-
-  useEffect(() => {
-    const changeColorOnClick = () => {
-      if (color === "black") {
-        setColor("red");
-      } else {
-        setColor("black");
-      }
-    };
-
-    document.addEventListener("click", changeColorOnClick);
-
-    return () => {
-      document.removeEventListener("click", changeColorOnClick);
-    };
-  }, [color]);
-*/
-
-  const cards = [
+  let cardsStart = [
     { image: angry, id: 1 },
     { image: beer, id: 2 },
     { image: confused, id: 3 },
@@ -64,10 +44,46 @@ const App = () => {
     { image: wink, id: 18 },
   ];
 
+  const [picked, setPicked] = useState([]);
+  const [cards, setCards] = useState(cardsStart);
+  const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
+
+  // method to check if repeated
+  const shuffleCards = (arr) => {
+    for (let i = arr.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  };
+
+  const onCardClick = (event) => {
+    console.log(event.target);
+    let id = parseInt(event.target.getAttribute("data"));
+    if (!picked.includes(id)) {
+      setPicked(picked.concat([id]));
+      setScore(score + 1);
+    } else {
+      setPicked([]);
+      setScore(0);
+    }
+    //setCards(shuffleCards(cards));
+    console.log(picked);
+    console.log(cards);
+  };
+
+  useEffect(() => {
+    setCards(shuffleCards(cards));
+    if (score > bestScore) {
+      setBestScore(score);
+    }
+  });
+
   return (
     <div className="app">
-      <Header current={2} best={2} />
-      <Board cards={cards} />
+      <Header current={score} best={bestScore} />
+      <Board cards={cards} onCardClick={onCardClick} />
       <Footer />
     </div>
   );
